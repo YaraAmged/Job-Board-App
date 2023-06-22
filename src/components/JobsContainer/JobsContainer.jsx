@@ -22,14 +22,18 @@ const JobsContainer = () => {
   const [loading, setLoading] = useState(true);
   const getJobs = async (isNewFilter) => {
     setLoading(true);
+    const oldJobs = isNewFilter ? [] : jobs;
     try {
       if (isNewFilter) setJobs([]);
       const res = await axios.get(
-        "https://cors-anywhere.herokuapp.com///serpapi.com/search.json?api_key=709d362b2a4e5f744404fa5cd99b80cc48c9230350b6170437ac26b0755f34c0&engine=google_jobs",
+        "https://cors-anywhere.herokuapp.com///serpapi.com/search.json",
         {
           params: {
+            api_key:
+              "709d362b2a4e5f744404fa5cd99b80cc48c9230350b6170437ac26b0755f34c0",
+            engine: "google_jobs",
             q: filters.q,
-            start: jobs.length,
+            start: oldJobs.length,
             location: filters.location,
             chips: filters.fullTimeOnly
               ? "employment_type:FULLTIME"
@@ -38,7 +42,7 @@ const JobsContainer = () => {
         }
       );
       if (res.data.jobs_results) {
-        setJobs([...jobs, ...res.data.jobs_results]);
+        setJobs([...oldJobs, ...res.data.jobs_results]);
       } else setJobs([]);
     } catch (err) {
       setJobs([]);

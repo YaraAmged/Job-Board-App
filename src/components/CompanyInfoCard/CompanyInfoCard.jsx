@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { darkTheme } from "../../App";
+import { AllOut } from "@mui/icons-material";
 
 const CompanyInfoCard = ({ job }) => {
   const theme = useTheme();
@@ -65,12 +66,10 @@ const CompanyInfoCard = ({ job }) => {
               ...darkTheme,
               palette: {
                 ...darkTheme.palette,
-                primary: isXs
-                  ? {
-                      main: alpha(theme.palette.primary.main, 0.1),
-                      contrastText: theme.palette.primary.main,
-                    }
-                  : { main: "#939BF4", contrastText: "#fff" },
+                primary: {
+                  main: alpha(theme.palette.primary.main, 0.1),
+                  contrastText: theme.palette.primary.main,
+                },
               },
             })}
           >
@@ -79,7 +78,7 @@ const CompanyInfoCard = ({ job }) => {
               variant="contained"
               color="primary"
               target="_blank"
-              sx={{ mt: "27px", textTransform: "none" }}
+              sx={{ mt: "27px", textTransform: "none", fontWeight: "700" }}
             >
               Company Site
             </Button>
